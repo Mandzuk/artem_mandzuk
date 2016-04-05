@@ -14,12 +14,13 @@ class UserController extends ActiveController
 
     	$actions = parent::actions();
 
-    	unset($actions['create']);
+    	$actions['create']['run']=[$this,'createFunc'];
+
 
     	return $actions;
     } 
 
-    public function actionCreate(){
+    public function createFunc(){
       
     	$model = new User();
 
@@ -34,18 +35,28 @@ class UserController extends ActiveController
                     $model->createUser($model);
 
                     if($i == $code_number-1){
+                        
+                        return $model;
 
-                        return $this->redirect(['index']);
+                        #return $this->redirect(['index']);
                     }
                 }
+                $response = Yii::$app->getResponse();
+                
+                $response->setStatusCode(201);
+                
+                $id = implode(',', array_values($model->getPrimaryKey(true)));
+                
+                $response->getHeaders()->set('Location', Url::toRoute([$this->indexAction], true));
             }
 
             
         } 
         else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            #return $this->render('create', [
+                #'model' => $model,
+            #]);
+		      return $model;
         }
 
     }
