@@ -1,0 +1,50 @@
+
+
+<IfModule mod_autoindex.c>
+	#Options -Indexes
+</IfModule>	
+
+
+
+
+
+
+<IfModule mod_rewrite.c>
+#Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.bravebranding\.ua$ [NC]
+RewriteRule ^(.*)$ http://bravebranding.ua/$1 [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ http://bravebranding.ua/ [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ http://bravebranding.ua/ [R=301,L]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+
+
+
+#Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+# if request begins with /admin remove admin and ad /backend/web/
+RewriteCond %{REQUEST_URI} ^/admin
+RewriteRule ^admin\/?(.*) /backend/web/$1
+#Redirect any non-www request to www to avoid Duplicate Content problems.
+
+
+
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ http://bravebranding.ua/ [R=301,L]
+RewriteCond %{HTTP_HOST} ^www.bravebranding\.ua$ [NC]
+RewriteRule ^(.*)$ http://bravebranding.ua/$1 [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ http://bravebranding.ua/ [R=301,L]
+</IfModule>
+
+
+
