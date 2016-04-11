@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 
+date_default_timezone_set('UTC');
 /**
  * This is the model class for table "bonus_code".
  *
@@ -35,10 +36,9 @@ class Code extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['generation_date', 'date_end_of'], 'required'],
-            [['status', 'number_of_code'], 'integer'],
-            [['generation_date', 'date_end_of', 'use_date'], 'safe'],
-            [['serial_number','number'], 'string', 'max' => 255],
+            [['status'], 'integer'],
+            [['generation_date', 'date_end_of', 'use_date','number_of_code'], 'safe'],
+            [['number','serial_number'], 'string', 'max' => 255]
         ];
     }
 
@@ -83,8 +83,11 @@ class Code extends \yii\db\ActiveRecord
     }
 
     public function changeCode($id){
+        
         $change = Code::find()->where(['id' => $id])->one();
+        
         $change->status = self::CONST_STATUS_OFF;
+        
         return $change->save() ? true : false;
     }
 
@@ -104,9 +107,11 @@ class Code extends \yii\db\ActiveRecord
 
             $code->number = $code->RandomNumber();
 
-            $code->generation_date = $this->generation_date;
+            $today = date("Y-m-d");
 
-            $code->date_end_of = $this->date_end_of;
+            $code->generation_date = $today;
+
+            $code->date_end_of = '2019-04-10';
 
             $code->status = self::CONST_STATUS_ON;
 
@@ -116,11 +121,7 @@ class Code extends \yii\db\ActiveRecord
  //       }
         
     }
-    public function createBlockCode(){
 
-        echo $this->number_of_code;
-
-    }
 }
 
 

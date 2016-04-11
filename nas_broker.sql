@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Апр 11 2016 г., 11:22
+-- Время создания: Апр 11 2016 г., 12:15
 -- Версия сервера: 5.6.24
 -- Версия PHP: 5.6.8
 
@@ -34,33 +34,21 @@ CREATE TABLE IF NOT EXISTS `bonus_code` (
   `date_end_of` date NOT NULL,
   `use_date` date DEFAULT NULL,
   `status` int(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=latin1;
 
 --
 -- Дамп данных таблицы `bonus_code`
 --
 
 INSERT INTO `bonus_code` (`id`, `serial_number`, `number`, `generation_date`, `date_end_of`, `use_date`, `status`) VALUES
-(97, 'HDNFG', 'd487519f1e66ded0a23af4365d03571c00f13854', '2016-04-05', '2016-11-19', NULL, 1),
-(110, 'EFMOX', 'b5b9f86253af965390d08a53786fe7ee6b7eef33', '2016-04-10', '2016-08-26', NULL, 1),
-(111, 'FWKDZ', '1d3ff27824dfd9180eb2f069f89fe8f2d12da7ef', '2016-04-10', '2016-08-26', NULL, 1),
-(112, 'VHXBE', '38ac9b800e4e9a77a14f232a12cf14b663d064c8', '2016-04-10', '2016-08-26', NULL, 1),
-(114, 'HQHVE', '507bbffd4f5a987307beaa9bcdbb75940cd8544e', '2016-04-10', '2016-08-26', NULL, 1),
-(129, '123423435345', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(130, '123423435345', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(131, '123423435345', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(132, '123423435345', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(133, '123423435345', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(134, 'cd195c31a3516740f9186aeb7b43af83c2458289', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(135, 'f9626909db95f04e3814c6b5f2115ececcbf84a9', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(136, '9bb69ae03878d4899d7ec845f2f825e0671ef5aa', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(137, '30a24c1bfe40cf9d037b601dd89da45f696f9a25', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(138, '69cfe183614dafc60988e6bd41b086904e9ce780', '123123', '2016-04-10', '2019-04-10', NULL, 1),
-(139, '253f25d38efa68c376af054737aaf5b90728db71', '123123', '2016-04-10', '2019-04-10', NULL, 1),
 (140, 'VODQG', 'f9e7028b19a5fdd81782198353124b8df9099402', '2016-04-10', '2019-04-10', NULL, 1),
 (141, 'FGTCN', '6cbe7184ea108949f565332454cdff5acdf9e4bc', '2016-04-10', '2019-04-10', NULL, 1),
 (142, 'WQHQI', '34e55243871e3e34dbc64a58103bc57e4ad2a40f', '2016-04-11', '2019-04-10', NULL, 1),
-(143, 'WGZSV', '83f02bd00452087d6a4b0e167e7da3edc7998c2a', '2016-04-11', '2019-04-10', NULL, 1);
+(143, 'WGZSV', '83f02bd00452087d6a4b0e167e7da3edc7998c2a', '2016-04-11', '2019-04-10', NULL, 0),
+(144, 'GXWKU', '74f945d4d0b3b7d1f9d4ce816ce6377ffd9b298b', '2016-04-11', '2019-04-10', NULL, 0),
+(145, 'NFAEV', 'a8efdc3f5269cb71cc84378aaea8da2c335ac965', '2016-04-11', '2019-04-10', NULL, 1),
+(146, 'DYGYE', '1e5d66536fa6fba558ac514cb01d2a6aca92b86e', '2016-04-11', '2019-04-10', NULL, 1),
+(147, 'JCAQS', 'ebdbd9fdb6a5d38072bf226bc972a1bff4d0f4ae', '2016-04-11', '2019-04-10', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -143,7 +131,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `bonus_code`
 --
 ALTER TABLE `bonus_code`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=144;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=148;
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
