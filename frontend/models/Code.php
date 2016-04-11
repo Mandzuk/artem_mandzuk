@@ -82,6 +82,12 @@ class Code extends \yii\db\ActiveRecord
         return $randomSerialNumber;
     }
 
+    public function changeCode($id){
+        $change = Code::find()->where(['id' => $id])->one();
+        $change->status = self::CONST_STATUS_OFF;
+        return $change->save() ? true : false;
+    }
+
     public function createCode()
     {
         if (!$this->validate()) {

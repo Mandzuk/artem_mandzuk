@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'use_date',
             // 'status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}'],
         ],
     ]); ?>
 </div>

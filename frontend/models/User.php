@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -42,9 +42,9 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['serial_number', 'number', 'generation_date', 'date_end_of'], 'required'],
+            [['date_end_of'], 'required'],
             [['number', 'status'], 'integer'],
-            [['generation_date', 'date_end_of', 'use_date'], 'safe'],
+            [['generation_date', 'date_end_of', 'use_date','number_of_code'], 'safe'],
             [['serial_number'], 'string', 'max' => 255]
         ];
     }
@@ -65,7 +65,8 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    public function RandomSerialNumber($length = 5) {
+    public function RandomSerialNumber($length = 5) 
+    {
         
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         
@@ -82,39 +83,42 @@ class User extends \yii\db\ActiveRecord
         return $randomString;
     }
 
-    public function RandomNumber(){
+    public function changeUser($key)
+    {
+
+        $change = User::find()->where(['id' => $key] )->one();
+ 
+        $change->status = self::CONST_STATUS_OFF;
+ 
+        return $change->save() ? true : false;
+    }
+
+    public function RandomNumber()
+    {
 
         $randomSerialNumber = sha1(mt_rand(10000, 99999).time());
 
         return $randomSerialNumber;
     }
 
-    public function createUser()
+    public function createUser($temp)
     {
-        if (!$this->validate()) {
-            return null;
-        }
 
-        //$number_of_code = $this->number_of_code;
+        $code = new user();
 
-//        for($i=0; $i < $number_of_code; $i++){
+        $code->serial_number = 'NBVY';
 
-            $code = new user();
+        $code->number = '123123';
 
-            $code->serial_number = $code->RandomSerialNumber();
+        $code->generation_date = '2016-04-10';
 
-            $code->number = $code->RandomNumber();
+        $code->date_end_of = '2020-04-10';
 
-            $code->generation_date = $this->generation_date;
+        $code->status = self::CONST_STATUS_ON;
 
-            $code->date_end_of = $this->date_end_of;
+        $save_code = $code->save() ? $code : null;
 
-            $code->status = self::CONST_STATUS_ON;
-
-            $save_code = $code->save() ? $code : null;
-
-            return $save_code;
- //       }
+        return $save_code;
         
     }
 }

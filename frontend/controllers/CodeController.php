@@ -107,17 +107,17 @@ class CodeController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+
+    public function actionChange($id){
+        if($get_user = Code::find()->where(['id' => $id, 'status' => 1])->one()){
+            if($get_user)
+            {
+                $change_status = new Code();
+                $change_status->changeCode($id);
+                return $this->redirect(['index']);
+            }
+        }  
     }
 
     /**

@@ -2,62 +2,57 @@
 
 namespace frontend\controllers;
 
+use Yii;
+use common\models\User;
+use common\models\UserSearch;
 use yii\rest\ActiveController;
+use yii\helpers\Url;
 
 
 
 class UserController extends ActiveController
 {
-    public $modelClass = 'app\models\User';
+    public $modelClass = 'common\models\User';
+
 
     public function actions(){
 
-    	$actions = parent::actions();
+        $actions = parent::actions();
 
-    	$actions['create']['run']=[$this,'createFunc'];
+        unset($actions['create']);
 
+        unset($actions['view']);
 
-    	return $actions;
-    } 
-
-    public function createFunc(){
-      
-    	$model = new User();
-
-        if ($model->load(Yii::$app->request->post())) 
-        {
-            if($model->validate()){
-
-                $code_number = $model->number_of_code;
-
-                for($i=0; $i < $code_number; $i++){
-                
-                    $model->createUser($model);
-
-                    if($i == $code_number-1){
-                        
-                        return $model;
-
-                        #return $this->redirect(['index']);
-                    }
-                }
-                $response = Yii::$app->getResponse();
-                
-                $response->setStatusCode(201);
-                
-                $id = implode(',', array_values($model->getPrimaryKey(true)));
-                
-                $response->getHeaders()->set('Location', Url::toRoute([$this->indexAction], true));
-            }
-
-            
-        } 
-        else {
-            #return $this->render('create', [
-                #'model' => $model,
-            #]);
-		      return $model;
-        }
-
+        return $actions;
     }
+
+    public function actionCreate(){
+
+        $model = new User();
+
+        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
+        if ($model->validate()) {
+
+            $code_number = $model->number_of_code;
+
+            for($i=0; $i < $code_number; $i++){
+
+                $temp = $model->createUser($model);
+            }    
+        }    
+    }
+    public function actionView($id){
+
+        if($get_user = User::find()->where(['id' => $id, 'status' => 1])->one()){
+
+            if($get_user){
+                
+                $change_status = new User();
+
+                $change_status->changeUser($id);
+            }
+        }  
+    }
+
 }
